@@ -1,17 +1,46 @@
 package com.csriseupapi.csriseupapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "jobs")
 public class Job {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "position_id")
     private Position position;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
+
+    @Column
     private String jobLink;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "status_id")
     private Status status;
+
+    @Column
     private LocalDate lastUpdated;
+
+    @Column
     private boolean open;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Long getId() {
