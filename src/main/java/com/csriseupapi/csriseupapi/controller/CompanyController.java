@@ -1,5 +1,6 @@
 package com.csriseupapi.csriseupapi.controller;
 
+import com.csriseupapi.csriseupapi.repository.CompanyRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -7,6 +8,7 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(path= "/api")
 public class CompanyController {
+    private CompanyRepository companyRepository;
     private static final Logger LOGGER = Logger.getLogger(CompanyController.class.getName());
 
     @GetMapping("/companies")
