@@ -2,6 +2,7 @@ package com.csriseupapi.csriseupapi.controller;
 
 import com.csriseupapi.csriseupapi.model.Job;
 import com.csriseupapi.csriseupapi.repository.JobRepository;
+import com.csriseupapi.csriseupapi.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,18 +12,18 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping(path= "/api")
 public class JobController {
-    private JobRepository jobRepository;
+    private JobService jobService;
     private static final Logger LOGGER = Logger.getLogger(JobController.class.getName());
 
     @Autowired
-    public void setJobRepository( JobRepository jobRepository){
-        this.jobRepository = jobRepository;
+    public void setJobService( JobRepository jobRepository){
+        this.jobService = jobService;
     }
 
     @GetMapping("/jobs")
     public List<Job> getJobs(){
         LOGGER.info("calling getJobs method from controller");
-        return jobRepository.findAll();
+        return jobService.getJobs();
     }
 
     @GetMapping("/jobs/{jobId}")
@@ -31,11 +32,11 @@ public class JobController {
         return "getting the job with id of " + jobId;
     }
 
-    @PostMapping("/jobs")
-    public String createJob(@RequestBody String body){
-        LOGGER.info("calling createJob method from controller");
-        return "creating a job " + body;
-    }
+//    @PostMapping("/jobs")
+//    public Job createJob(@RequestBody Job jobObject){
+//        LOGGER.info("calling createJob method from controller");
+//        return jobService.createJob(jobObject);
+//    }
 
     @PutMapping("/jobs/{jobId}")
     public String updateJob(@PathVariable Long jobId, @RequestBody String body){
