@@ -1,7 +1,6 @@
 package com.csriseupapi.csriseupapi.controller;
 
 import com.csriseupapi.csriseupapi.model.Job;
-import com.csriseupapi.csriseupapi.repository.JobRepository;
 import com.csriseupapi.csriseupapi.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class JobController {
     private static final Logger LOGGER = Logger.getLogger(JobController.class.getName());
 
     @Autowired
-    public void setJobService( JobRepository jobRepository){
+    public void setJobService( JobService jobService){
         this.jobService = jobService;
     }
 

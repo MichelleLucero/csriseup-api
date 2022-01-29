@@ -1,12 +1,17 @@
 package com.csriseupapi.csriseupapi.service;
 
+import com.csriseupapi.csriseupapi.exception.InformationNotFoundException;
 import com.csriseupapi.csriseupapi.model.Job;
 import com.csriseupapi.csriseupapi.repository.JobRepository;
+import com.csriseupapi.csriseupapi.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
 
+@Service
 public class JobService {
     private JobRepository jobRepository;
     private static final Logger LOGGER = Logger.getLogger(JobService.class.getName());
@@ -18,7 +23,15 @@ public class JobService {
 
     public List<Job> getJobs(){
         LOGGER.info("calling getJobs method from service");
-        return jobRepository.findAll();
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("HELLLLLLLLLLLO");
+        System.out.println(userDetails.getUser().getId());
+        List<Job> jobs = jobRepository.findByUserId(userDetails.getUser().getId());
+        if(jobs.isEmpty()){
+            throw new InformationNotFoundException("no categories found for user id " + userDetails.getUser().getId());
+        } else {
+            return jobs;
+        }
     }
 
 

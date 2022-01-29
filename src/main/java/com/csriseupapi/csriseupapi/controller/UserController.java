@@ -1,7 +1,11 @@
 package com.csriseupapi.csriseupapi.controller;
+import com.csriseupapi.csriseupapi.model.Request.LoginRequest;
 import com.csriseupapi.csriseupapi.model.User;
 import com.csriseupapi.csriseupapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +28,10 @@ public class UserController {
     public User createUser(@RequestBody User userObject){
         LOGGER.info("calling createUser method from controller");
         return userService.createUser(userObject);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        return userService.loginUser(loginRequest);
     }
 }
