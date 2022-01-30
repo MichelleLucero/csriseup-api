@@ -44,9 +44,9 @@ public class JobController {
         return jobService.updateJob(jobId, jobRequestObject);
     }
 
-//    @DeleteMapping("/jobs/{jobId}")
-//    public Job deleteJob(@PathVariable(value = "jobId") Long jobId){
-//        LOGGER.info("calling deleteJob method from controller");
-//        return jobService.deleteJob(jobId);
-//    }
+    @DeleteMapping("/jobs/{jobId}")
+    public Job deleteJob(@PathVariable(value = "jobId") Long jobId){
+        LOGGER.info("calling deleteJob method from controller");
+        return jobService.deleteJob(jobId);
+    }
 }

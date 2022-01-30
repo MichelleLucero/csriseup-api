@@ -149,16 +149,16 @@ public class JobService {
         return jobRepository.save(job);
     }
 
-//    public Job deleteJob(Long jobId){
-//        LOGGER.info("calling deleteJob method from service");
-//        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Job job = jobRepository.findByUserIdAndId(jobId,userDetails.getUser().getId());
-//        if( job == null){
-//            throw new InformationNotFoundException("job with id " + jobId + " not found");
-//        } else {
-//            jobRepository.deleteById(jobId);
-//            return job;
-//        }
-//    }
+    public Job deleteJob(Long jobId){
+        LOGGER.info("calling deleteJob method from service");
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Job job = jobRepository.findByUserIdAndId(userDetails.getUser().getId(),jobId);
+        if( job == null){
+            throw new InformationNotFoundException("job with id " + jobId + " not found");
+        } else {
+            jobRepository.deleteById(jobId);
+            return job;
+        }
+    }
 
 }
