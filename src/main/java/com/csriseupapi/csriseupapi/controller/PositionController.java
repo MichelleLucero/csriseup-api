@@ -1,9 +1,12 @@
 package com.csriseupapi.csriseupapi.controller;
 
+import com.csriseupapi.csriseupapi.model.Position;
 import com.csriseupapi.csriseupapi.repository.JobRepository;
 import com.csriseupapi.csriseupapi.repository.PositionRepository;
 import com.csriseupapi.csriseupapi.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +21,11 @@ public class PositionController {
     @Autowired
     public void setPositionService(PositionService positionService) {
         this.positionService = positionService;
+    }
+
+    @PostMapping("/positions")
+    public Position createPosition(@RequestBody Position positionObject){
+        LOGGER.info("calling createPosition from controller");
+        return positionService.createPosition(positionObject);
     }
 }
