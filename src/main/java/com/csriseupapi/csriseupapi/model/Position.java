@@ -17,9 +17,13 @@ public class Position {
     @Column
     private String position;
 
-    @OneToMany(mappedBy = "position")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Job> jobList;
+    public Position(String position) {
+        this.position = position;
+    }
+
+    public Position() {
+
+    }
 
     public Long getId() {
         return id;
@@ -37,11 +41,4 @@ public class Position {
         this.position = position;
     }
 
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
-    }
 }

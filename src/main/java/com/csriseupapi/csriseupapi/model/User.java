@@ -18,16 +18,26 @@ public class User {
     @Column
     private String userName;
 
-    @Column
+    @Column(unique = true)
     private String emailAddress;
 
     @Column
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    // one user can have only one profile
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id",referencedColumnName = "id")
+    private UserProfile userProfile;
+
+
+    // user can have more than one category
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Job> jobList;
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -59,6 +69,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 
     public List<Job> getJobList() {
