@@ -13,6 +13,7 @@ import com.csriseupapi.csriseupapi.repository.StatusRepository;
 import com.csriseupapi.csriseupapi.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -110,5 +111,54 @@ public class JobService {
         }
     }
 
+    public Job updateJob(Long jobId, JobRequest jobRequestObject){
+        LOGGER.info("calling updateJob from service");
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Job job = jobRepository.findByUserIdAndId(userDetails.getUser().getId(),jobId);
+        job.setJobLink(jobRequestObject.getJobLink());
+        job.setOpen(jobRequestObject.isOpen());
+        job.setLastUpdated(LocalDate.now());
+
+        Position position = positionRepository.findByPosition(jobRequestObject.getPosition());
+        Company company = companyRepository.findByCompany(jobRequestObject.getCompany());
+        Status status = statusRepository.findByStatus(jobRequestObject.getStatus());
+        if( position != null){
+            job.setPosition(position);
+        } else {
+            Position addPosition = new Position(jobRequestObject.getPosition());
+            positionRepository.save(addPosition);
+            Position addPositionWithId = positionRepository.findByPosition(jobRequestObject.getPosition());
+            job.setPosition(addPositionWithId);
+        }
+        if( company != null){
+            job.setCompany(company);
+        } else {
+            Company addCompany = new Company(jobRequestObject.getCompany());
+            companyRepository.save(addCompany);
+            Company addCompanyWithId = companyRepository.findByCompany(jobRequestObject.getCompany());
+            job.setCompany(addCompanyWithId);
+        }
+        if( status != null ){
+            job.setStatus(status);
+        } else {
+            Status addStatus = new Status(jobRequestObject.getStatus());
+            statusRepository.save(addStatus);
+            Status addStatusWithId = statusRepository.findByStatus(jobRequestObject.getStatus());
+            job.setStatus(addStatusWithId);
+        }
+        return jobRepository.save(job);
+    }
+
+//    public Job deleteJob(Long jobId){
+//        LOGGER.info("calling deleteJob method from service");
+//        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Job job = jobRepository.findByUserIdAndId(jobId,userDetails.getUser().getId());
+//        if( job == null){
+//            throw new InformationNotFoundException("job with id " + jobId + " not found");
+//        } else {
+//            jobRepository.deleteById(jobId);
+//            return job;
+//        }
+//    }
 
 }

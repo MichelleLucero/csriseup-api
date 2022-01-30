@@ -39,14 +39,14 @@ public class JobController {
     }
 
     @PutMapping("/jobs/{jobId}")
-    public String updateJob(@PathVariable Long jobId, @RequestBody String body){
+    public Job updateJob(@PathVariable Long jobId, @RequestBody JobRequest jobRequestObject){
         LOGGER.info("calling updateJob method from controller");
-        return "updating the job with id of " + jobId + " " + body;
+        return jobService.updateJob(jobId, jobRequestObject);
     }
 
-    @DeleteMapping("/jobs/{jobId}")
-    public String deleteJob(@PathVariable(value = "jobId") Long jobId){
-        LOGGER.info("calling deleteJob method from controller");
-        return "deleting the job with the id of " + jobId;
-    }
+//    @DeleteMapping("/jobs/{jobId}")
+//    public Job deleteJob(@PathVariable(value = "jobId") Long jobId){
+//        LOGGER.info("calling deleteJob method from controller");
+//        return jobService.deleteJob(jobId);
+//    }
 }

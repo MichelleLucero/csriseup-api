@@ -10,6 +10,8 @@ public class JobRequest {
 
     private String status;
 
+    private boolean open;
+
     public String getPosition() {
         return position;
     }
@@ -40,5 +42,13 @@ public class JobRequest {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 }
