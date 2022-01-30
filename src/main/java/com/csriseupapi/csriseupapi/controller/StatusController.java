@@ -3,6 +3,8 @@ package com.csriseupapi.csriseupapi.controller;
 import com.csriseupapi.csriseupapi.repository.StatusRepository;
 import com.csriseupapi.csriseupapi.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +21,9 @@ public class StatusController {
         this.statusService = statusService;
     }
 
+//    @PostMapping("/statuses")
+//    public Status createStatus(@RequestBody Status statusObject){
+//        LOGGER.info("calling")
+//    }
 
 }
