@@ -26,16 +26,16 @@ public class JobController {
         return jobService.getJobs();
     }
 
-    @GetMapping("/jobs/{jobId}")
-    public String getJob(@PathVariable Long jobId){
-        LOGGER.info("calling getJob method from controller");
-        return "getting the job with id of " + jobId;
-    }
-
     @PostMapping("/jobs")
     public Job createJob(@RequestBody JobRequest jobRequestObject){
         LOGGER.info("calling createJob method from controller");
         return jobService.createJob(jobRequestObject);
+    }
+
+    @GetMapping("/jobs/{jobId}")
+    public Job getJob(@PathVariable Long jobId){
+        LOGGER.info("calling getJob method from controller");
+        return jobService.getJob(jobId);
     }
 
     @PutMapping("/jobs/{jobId}")

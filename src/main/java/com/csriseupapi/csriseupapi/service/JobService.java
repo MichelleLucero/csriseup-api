@@ -54,11 +54,12 @@ public class JobService {
         System.out.println("HELLLLLLLLLLLO");
         System.out.println(userDetails.getUser().getId());
         List<Job> jobs = jobRepository.findByUserId(userDetails.getUser().getId());
-        if(jobs.isEmpty()){
-            throw new InformationNotFoundException("no categories found for user id " + userDetails.getUser().getId());
-        } else {
-            return jobs;
-        }
+//        if(jobs.isEmpty()){
+//            throw new InformationNotFoundException("no categories found for user id " + userDetails.getUser().getId());
+//        } else {
+//            return jobs;
+//        }
+        return jobs;
     }
 
     public Job createJob(JobRequest jobRequestObject){
@@ -93,8 +94,21 @@ public class JobService {
             Status addStatusWithId = statusRepository.findByStatus(jobRequestObject.getStatus());
             job.setStatus(addStatusWithId);
         }
-
         return jobRepository.save(job);
     }
+
+    public Job getJob(Long jobId){
+        LOGGER.info("calling getJob from service");
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Job job = jobRepository.findByUserIdAndId(userDetails.getUser().getId(),jobId);
+        System.out.println(job.getCompany());
+        System.out.println(job.getJobLink());
+        if(job != null){
+            return job;
+        } else {
+            throw new InformationNotFoundException("job with id " + jobId + " does not exists");
+        }
+    }
+
 
 }
