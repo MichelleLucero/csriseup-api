@@ -31,11 +31,11 @@ public class JobController {
         return "getting the job with id of " + jobId;
     }
 
-//    @PostMapping("/jobs")
-//    public Job createJob(@RequestBody Job jobObject){
-//        LOGGER.info("calling createJob method from controller");
-//        return jobService.createJob(jobObject);
-//    }
+    @PostMapping("/jobs")
+    public Job createJob(@RequestBody Job jobObject){
+        LOGGER.info("calling createJob method from controller");
+        return jobService.createJob(jobObject);
+    }
 
     @PutMapping("/jobs/{jobId}")
     public String updateJob(@PathVariable Long jobId, @RequestBody String body){

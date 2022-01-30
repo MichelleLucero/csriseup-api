@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.time.*;
 
 @Service
 public class JobService {
@@ -32,6 +33,20 @@ public class JobService {
         } else {
             return jobs;
         }
+    }
+
+    public Job createJob(Job jobObject){
+        LOGGER.info("calling createJob method from service");
+        MyUserDetails userDetails = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Job job = jobRepository.findByUserIdAndPositionIdAndCompanyId(
+//                userDetails.getUser().getId(),
+//                jobObject.getPosition().getId(),
+//                jobObject.getCompany().getId());
+        jobObject.setUser(userDetails.getUser());
+        jobObject.setLastUpdated(LocalDate.now());
+        jobObject.setOpen(true);
+        return jobRepository.save(jobObject);
+
     }
 
 

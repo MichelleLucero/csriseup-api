@@ -17,10 +17,6 @@ public class Company {
     @Column
     private String company;
 
-    @OneToMany(mappedBy = "company")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Job> jobList;
-
     public Long getId() {
         return id;
     }
@@ -37,11 +33,4 @@ public class Company {
         this.company = company;
     }
 
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
-    }
 }

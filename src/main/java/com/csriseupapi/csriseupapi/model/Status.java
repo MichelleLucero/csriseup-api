@@ -17,10 +17,6 @@ public class Status {
     @Column
     private String status;
 
-    @OneToMany(mappedBy = "status")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Job> jobList;
-
     public Long getId() {
         return id;
     }
@@ -37,11 +33,4 @@ public class Status {
         this.status = status;
     }
 
-    public List<Job> getJobList() {
-        return jobList;
-    }
-
-    public void setJobList(List<Job> jobList) {
-        this.jobList = jobList;
-    }
 }
