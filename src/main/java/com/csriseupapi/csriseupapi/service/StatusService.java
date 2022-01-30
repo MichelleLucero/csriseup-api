@@ -6,6 +6,7 @@ import com.csriseupapi.csriseupapi.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -26,5 +27,10 @@ public class StatusService {
         } else {
             return statusRepository.save(statusObject);
         }
+    }
+
+    public List<Status> getStatuses(){
+        LOGGER.info("calling getStatuses from service");
+        return statusRepository.findAll();
     }
 }
