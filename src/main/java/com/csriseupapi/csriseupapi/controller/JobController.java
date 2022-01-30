@@ -1,6 +1,7 @@
 package com.csriseupapi.csriseupapi.controller;
 
 import com.csriseupapi.csriseupapi.model.Job;
+import com.csriseupapi.csriseupapi.model.Request.JobRequest;
 import com.csriseupapi.csriseupapi.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,9 @@ public class JobController {
     }
 
     @PostMapping("/jobs")
-    public Job createJob(@RequestBody Job jobObject){
+    public Job createJob(@RequestBody JobRequest jobRequestObject){
         LOGGER.info("calling createJob method from controller");
-        return jobService.createJob(jobObject);
+        return jobService.createJob(jobRequestObject);
     }
 
     @PutMapping("/jobs/{jobId}")

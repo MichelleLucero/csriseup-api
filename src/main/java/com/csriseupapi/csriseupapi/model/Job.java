@@ -43,6 +43,17 @@ public class Job {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Job(String jobLink, LocalDate lastUpdated, boolean open, User user) {
+        this.jobLink = jobLink;
+        this.lastUpdated = lastUpdated;
+        this.open = open;
+        this.user = user;
+    }
+
+    public Job() {
+
+    }
+
     public Long getId() {
         return id;
     }

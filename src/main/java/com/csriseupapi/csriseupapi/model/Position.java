@@ -17,6 +17,14 @@ public class Position {
     @Column
     private String position;
 
+    public Position(String position) {
+        this.position = position;
+    }
+
+    public Position() {
+
+    }
+
     public Long getId() {
         return id;
     }

@@ -17,6 +17,14 @@ public class Company {
     @Column
     private String company;
 
+    public Company(String company) {
+        this.company = company;
+    }
+
+    public Company() {
+
+    }
+
     public Long getId() {
         return id;
     }
