@@ -1,5 +1,6 @@
 package com.csriseupapi.csriseupapi.controller;
 
+import com.csriseupapi.csriseupapi.model.Status;
 import com.csriseupapi.csriseupapi.repository.StatusRepository;
 import com.csriseupapi.csriseupapi.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,10 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-//    @PostMapping("/statuses")
-//    public Status createStatus(@RequestBody Status statusObject){
-//        LOGGER.info("calling")
-//    }
+    @PostMapping("/statuses")
+    public Status createStatus(@RequestBody Status statusObject){
+        LOGGER.info("calling createStatus from controller");
+        return statusService.createStatus(statusObject);
+    }
 
 }
