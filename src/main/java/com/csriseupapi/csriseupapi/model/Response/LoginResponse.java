@@ -1,18 +1,18 @@
 package com.csriseupapi.csriseupapi.model.Response;
 
 public class LoginResponse {
-    private String jwt;
+    private String token;
 
 
-    public LoginResponse(String jwt) {
-        this.jwt = jwt;
+    public LoginResponse(String token) {
+        this.token = token;
     }
 
-    public String getJwt() {
-        return jwt;
+    public String getToken() {
+        return token;
     }
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
