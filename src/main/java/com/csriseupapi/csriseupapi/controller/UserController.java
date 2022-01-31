@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User createUser(@RequestBody User userObject){
+    public ResponseEntity<?> createUser(@RequestBody User userObject){
         LOGGER.info("calling createUser method from controller");
         return userService.createUser(userObject);
     }
