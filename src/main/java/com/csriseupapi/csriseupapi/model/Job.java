@@ -14,12 +14,12 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
@@ -27,7 +27,7 @@ public class Job {
     @Column
     private String jobLink;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
